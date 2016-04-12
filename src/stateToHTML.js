@@ -81,6 +81,14 @@ function getTags(blockType: string): Array<string> {
       return ['blockquote'];
     case BLOCK_TYPE.CODE:
       return ['pre', 'code'];
+    case 'LEFT':
+      return ['div class="text-left"', 'span'];
+    case 'CENTER':
+      return ['div class="text-center"', 'span'];
+    case 'RIGHT':
+      return ['div class="text-right"', 'span'];
+    case 'JUSTIFY':
+      return ['div class="text-justify"', 'span'];
     default:
       return ['p'];
   }
