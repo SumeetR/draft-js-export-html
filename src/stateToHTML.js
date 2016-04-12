@@ -82,13 +82,13 @@ function getTags(blockType: string): Array<string> {
     case BLOCK_TYPE.CODE:
       return ['pre', 'code'];
     case 'LEFT':
-      return ['div class="text-left"', 'span'];
+      return ['p style="text-align: left"'];
     case 'CENTER':
-      return ['div class="text-center"', 'span'];
+      return ['p style="text-align: center"'];
     case 'RIGHT':
-      return ['div class="text-right"', 'span'];
+      return ['p style="text-align: right"'];
     case 'JUSTIFY':
-      return ['div class="text-justify"', 'span'];
+      return ['p style="text-align: justify"'];
     default:
       return ['p'];
   }
@@ -194,10 +194,11 @@ class MarkupGenerator {
   writeEndTag(blockType) {
     let tags = getTags(blockType);
     if (tags.length === 1) {
-      this.output.push(`</${tags[0]}>\n`);
+      this.output.push(`</${tags[0].split(' ')[0]}>\n`);
     } else {
       let output = [];
-      for (let tag of tags) {
+      for (let _tag of tags) {
+        const tag = _tag.split(' ')[0];
         output.unshift(`</${tag}>`);
       }
       this.output.push(output.join('') + '\n');
