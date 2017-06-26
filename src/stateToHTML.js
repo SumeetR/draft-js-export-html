@@ -18,6 +18,8 @@ const {
   STRIKETHROUGH,
   UNDERLINE,
 } = INLINE_STYLE;
+const SUB = 'SUB';
+const SUPER = 'SUPER';
 
 const INDENT = '  ';
 const BREAK = '<br/>';
@@ -255,6 +257,12 @@ class MarkupGenerator {
           // If our block type is CODE then we are already wrapping the whole
           // block in a `<code>` so don't wrap inline code elements.
           content = (blockType === BLOCK_TYPE.CODE) ? content : `<code>${content}</code>`;
+        }
+        if (style.has(SUB)) {
+          content = `<sub>${content}</sub>`;
+        }
+        if (style.has(SUPER)) {
+          content = `<sup>${content}</sup>`;
         }
         return content;
       }).join('');
